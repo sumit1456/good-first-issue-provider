@@ -22,7 +22,7 @@ import org.springframework.web.client.RestClient.Builder;
 public class GitHubClient {
 
     private final static Logger log = LoggerFactory.getLogger(GitHubClient.class);
-    public static final String GITHUB_TOKEN = "GITHUB_TOKEN";
+    public static final String GITHUB_TOKEN = "sumittoken18";
     public static final String GITHUB_API_URL = "https://api.github.com";
     public static final String HTTP_ACCEPT = "Accept";
     public static final String GITHUB_V_3_JSON = "application/vnd.github.v3+json";

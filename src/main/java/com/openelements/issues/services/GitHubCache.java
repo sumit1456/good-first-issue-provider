@@ -60,16 +60,19 @@ public class GitHubCache {
     }
 
     private void updateContributors(@NonNull final String org, @NonNull final String repo) {
-        try {
-            log.info("Updating contributors cache for repo '{}/{}'", org, repo);
-            final Repository repository = gitHubClient.getRepository(org, repo);
-            final List<Contributor> contributors = gitHubClient.getContributors(repository);
-            log.info("Found {} contributors for repo '{}/", contributors.size(), repository.org(), repository.name());
-            this.contributorsCache.put(hash(org, repo), contributors);
-        } catch (final Exception e) {
-            log.error("Failed to update contributor cache for repo '" + org + "/" + repo + "'", e);
-        }
+    try {
+        log.info("Updating contributors cache for repo '{}/{}'", org, repo);
+        final Repository repository = gitHubClient.getRepository(org, repo);
+        final List<Contributor> contributors = gitHubClient.getContributors(repository);
+        log.info("Found {} contributors for repo '{}/{}", contributors.size(), repository.org(), repository.name());
+        this.contributorsCache.put(hash(org, repo), contributors);
+    } catch (final Exception e) {
+        log.error("❗ Failed to update contributor cache for repo '" + org + "/" + repo + "'", e);
+        log.error("👉 Did you forget to set your GitHub token in application.properties as 'github.token'? "
+                + "The token is required to access GitHub APIs.");
     }
+}
+
 
     private void updateIssues(@NonNull final String org, @NonNull final String repo, @Nullable List<String> excludedIdentifiers, @NonNull final String label) {
         try {
@@ -121,4 +124,8 @@ public class GitHubCache {
         Objects.requireNonNull(repo, "repo must not be null");
         return org + "/" + repo;
     }
+
+    
 }
+
+
